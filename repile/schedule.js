@@ -1,8 +1,8 @@
 const schedule = require('node-schedule');
 const update = require('./update');
 
-// 定时任务,周 1,3,5 的14:01:01 执行.
-schedule.scheduleJob('1 1 14 * * 1,3,5,0', function () {
+// 定时任务,周 2,4,6 的 2:01:01 执行.
+schedule.scheduleJob('1 1 2 * * 2,4,6', function () {
   // 获取电影院上映电影
   update.writePageData('in_theaters', 1);
 
@@ -18,7 +18,7 @@ schedule.scheduleJob('1 1 14 * * 1,3,5,0', function () {
 
 
 // 定时任务,每月31号的14:01:01 执行.
-schedule.scheduleJob('1 1 14 31 * *', function () {
+schedule.scheduleJob('1 1 2 31 * *', function () {
   // 获取 Top250
   update.writePageData('top250', 1);
 });

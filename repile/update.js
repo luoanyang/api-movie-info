@@ -12,7 +12,6 @@ function writePageData(name, page) {
     const data = JSON.parse(result.body);
     const totalPage = Math.ceil(data.total / data.count);
     const textName = `${config.DATA_PATCH}${name}?page=${page}.json`;
-
     fs.writeFileSync(textName, result.body);
     if (page < totalPage) {
       console.log(page)
