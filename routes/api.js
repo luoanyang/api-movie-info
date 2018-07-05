@@ -51,8 +51,9 @@ router.get('/movie/subject/:id', (req, res, next) => {
 
   if (fs.existsSync(textName)) {
     const text = fs.readFileSync(textName);
+    const textJson = JSON.parse(text);
     // 检查存储的json文件是否有数据,有数据就直接获取返回,没有的话,就在爬一次数据.
-    if (text.toString()) {
+    if (text.toString() && textJson.url) {
       const data = require(textName);
       return res.json(data);
     }
@@ -73,7 +74,6 @@ router.get('/movie/subject/:id', (req, res, next) => {
     } else {
       tags = info.slice(startIndex, info.indexOf('制片国家/地区:')).replace('类型:', '');
     }
-
     const data = {
       title: $('#content>h1>span[property="v:itemreviewed"]').text().split(' ')[0],
       directors: $('#info>span:first-child .attrs').text(),
@@ -81,7 +81,8 @@ router.get('/movie/subject/:id', (req, res, next) => {
       tags: tags,
       average: $('#interest_sectl .rating_self .rating_num').text(),
       avatar: $('#mainpic>.nbgnbg>img').attr('src'),
-      summary: $('#link-report span[property="v:summary"]').text().replace('©豆瓣', '')
+      summary: $('#link-report span[property="v:summary"]').text().replace('©豆瓣', ''),
+      url: $('#info>a:last-of-type').attr('href')
     };
 
     fs.writeFileSync(textName, JSON.stringify(data));
