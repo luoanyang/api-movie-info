@@ -47,19 +47,19 @@ router.get('/movie/coming-soon', (req, res, next) => {
 
 // 根据电影id查找电影详细信息
 router.get('/movie/subject/:id', (req, res, next) => {
-  const textName = `${config.SUBJECT_DATA_PATCH}${req.params.id}.json`;
+  // const textName = `${config.SUBJECT_DATA_PATCH}${req.params.id}.json`;
 
-  if (fs.existsSync(textName)) {
-    const text = fs.readFileSync(textName);
-    const textJson = JSON.parse(text);
-    // 检查存储的json文件是否有数据,有数据就直接获取返回,没有的话,就在爬一次数据.
-    if (text.toString() && textJson.url) {
-      const data = require(textName);
-      return res.json(data);
-    }
-  }
+  // if (fs.existsSync(textName)) {
+  //   const text = fs.readFileSync(textName);
+  //   const textJson = JSON.parse(text);
+  //   // 检查存储的json文件是否有数据,有数据就直接获取返回,没有的话,就在爬一次数据.
+  //   if (text.toString() && textJson.url) {
+  //     const data = require(textName);
+  //     return res.json(data);
+  //   }
+  // }
   // 爬取电影详情的数据.
-  superagent.get('https://movie.douban.com/subject/' + req.params.id).end(function (err, result) {
+  superagent.get('https://movie.douban.com/subject/' + req.params.id).end(function(err, result) {
     if (err) {
       return next(err);
     }
@@ -85,7 +85,7 @@ router.get('/movie/subject/:id', (req, res, next) => {
       url: $('#info>a:last-of-type').attr('href')
     };
 
-    fs.writeFileSync(textName, JSON.stringify(data));
+    // fs.writeFileSync(textName, JSON.stringify(data));
     res.json(data);
   });
 

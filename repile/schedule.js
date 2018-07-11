@@ -3,7 +3,7 @@ const schedule = require('node-schedule');
 const update = require('./update');
 console.log('run settime')
   // 定时任务,周 1,3,5,7 的 10:35:01 执行.
-schedule.scheduleJob('1 1 1 * * 0,2,4,6', function() {
+schedule.scheduleJob('1 39 0 * * 1,3,5,7', function() {
 
   // 获取电影院上映电影
   update.writePageData('in_theaters', 1);

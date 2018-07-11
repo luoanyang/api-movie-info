@@ -3,7 +3,7 @@ const fs = require('fs');
 //请求地址
 const REQUEST_API = 'https://api.douban.com/v2/movie/';
 //储存数据的地址
-const DATA_PATCH = '/home/html/web/api-movie/data/';
+const DATA_PATCH = '/home/html/web/api-movie-info/data/';
 
 // 根据接口获取数据并且写入.json文件,分页数据
 function writePageData(name, page) {
